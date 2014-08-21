@@ -1,0 +1,18 @@
+{
+	"server": {
+		"port": 8080,
+		"host": "127.0.0.1"
+	},
+	"resources": {
+		"whitelist": true,
+		"allowed": {
+			"urls": [
+				"https://github.com",
+				"https://www.google.com"
+			],
+			"hosts": [
+				"placekitten.com"
+			]
+		}
+	}
+}
