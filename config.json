@@ -6,10 +6,6 @@
 	"resources": {
 		"whitelist": true,
 		"allowed": {
-			"urls": [
-				"https://github.com",
-				"https://www.google.com"
-			],
 			"hosts": [
 				"placekitten.com"
 			]

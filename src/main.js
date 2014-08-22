@@ -1,6 +1,7 @@
 // main.js
 // main file for the proxy
 var http = require('http'),
+	urlParser = require('url'),
 	express = require('express');
 
 var app = express(),
@@ -16,7 +17,12 @@ app.get('/r/:url', function(req, res) {
 
 	// check that URL at the door
 	if (config.resources.whitelist) {
-		// todo
+		var parsed = urlParser.parse(url);
+
+		if (config.resources.allowed.hosts.indexOf(parsed.hostname) == -1) {
+			res.status(500).send('Not allowed to access resource.');
+			return;
+		}
 	}
 
 	// go
@@ -36,6 +42,6 @@ app.get('/r/:url', function(req, res) {
 	});
 });
 
-app.listen(process.env.development ? 3000 : config.server.port);
+app.listen(process.env.development ? 3000 : config.server.port, config.server.host);
 
 console.log('App started.');
