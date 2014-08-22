@@ -43,6 +43,6 @@ app.get('/test', function(req, res) {
 	res.send('This is a test');
 })
 
-app.listen(process.env.development ? 3000 : );
+app.listen(process.env.development ? 3000 : 80);
 
 console.log('App started.');
