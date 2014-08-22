@@ -13,3 +13,20 @@ $ npm start
 
 ### Configuration
 Configuration is provided in the `config.json` file. It is mostly self-explanatory.
+
+### Performance
+The proxy server is mostly high performing, while using `ab`...
+
+```
+Concurrency Level:      10
+Time taken for tests:   52.973 seconds
+Complete requests:      100000
+Failed requests:        0
+Write errors:           0
+Total transferred:      825500000 bytes
+HTML transferred:       815700000 bytes
+Requests per second:    1887.74 [#/sec] (mean)
+Time per request:       5.297 [ms] (mean)
+Time per request:       0.530 [ms] (mean, across all concurrent requests)
+Transfer rate:          15218.08 [Kbytes/sec] received
+```
