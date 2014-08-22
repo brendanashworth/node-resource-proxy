@@ -1,0 +1,28 @@
+{
+  "name": "node-resource-proxy",
+  "version": "0.0.1",
+  "description": "Configurable, restricting resource proxy",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.8.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/boboman13/node-resource-proxy.git"
+  },
+  "keywords": [
+    "resource",
+    "proxy"
+  ],
+  "author": "boboman13",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/boboman13/node-resource-proxy/issues"
+  },
+  "homepage": "https://github.com/boboman13/node-resource-proxy"
+}
