@@ -20,28 +20,21 @@ app.get('/r/:url', function(req, res) {
 	}
 
 	// go
-	http.get(url, function(data) {
+	http.get(url, function(result) {
 		// check for 200 status code
-		if (data.statusCode !== 200) {
+		if (result.statusCode !== 200) {
 			res.status(404).send('Resource not found.');
 			return;
 		}
 
-		if (typeof data.headers['content-type'] !== undefined)
-			res.set('Content-Type', data.headers['content-type']);
+		if (typeof result.headers['content-type'] !== 'undefined')
+			res.set('Content-Type', result.headers['content-type']);
 
-		data.on('data', function(chunk) {
-			console.log('got: ' + chunk);
-			res.status(200).send(chunk);
-		});
+		result.pipe(res.status(200));
 	}).on('error', function() {
 		res.status(404).send('Resource not found.');
 	});
 });
-
-app.get('/test', function(req, res) {
-	res.send('This is a test');
-})
 
 app.listen(process.env.development ? 3000 : 80);
 
