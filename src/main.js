@@ -36,6 +36,6 @@ app.get('/r/:url', function(req, res) {
 	});
 });
 
-app.listen(process.env.development ? 3000 : 80);
+app.listen(process.env.development ? 3000 : config.server.port);
 
 console.log('App started.');
