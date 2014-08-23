@@ -1,7 +1,13 @@
 // main.js
 // main file for the proxy
+
+// /r for resource
+//   http://placekitten.com/200/300
+//   /r/aHR0cDovL3BsYWNla2l0dGVuLmNvbS9nLzIwMC8zMDA=
+
 var fs = require('fs'),
 	http = require('http'),
+	cluster = require('cluster'),
 	urlParser = require('url');
 
 var config = require('../config');
@@ -51,10 +57,7 @@ function serveFromExternal(url, res, writeStream) {
 	});
 }
 
-// /r for resource
-//   http://placekitten.com/200/300
-//   /r/aHR0cDovL3BsYWNla2l0dGVuLmNvbS9nLzIwMC8zMDA=
-var server = http.createServer(function(req, res) {
+function handleRequest(req, res) {
 	// check to make sure it is base64
 	if (!regex.test(req.url)) {
 		res.writeHead(500, {
@@ -104,7 +107,22 @@ var server = http.createServer(function(req, res) {
 	} else {
 		serveFromExternal(url, res);
 	}
-});
+}
 
-server.listen(config.server.port, config.server.host);
-console.log('App started.');
+// CLUSTER FOR MORE SPEED, CAPTAIN!
+if (cluster.isMaster) {
+	var numCPUs = require('os').cpus().length;
+	// split off the processes
+	for (var i = 0; i < numCPUs; i++) {
+		cluster.fork();
+	}
+
+	// handle process die
+	cluster.on('exit', function(worker, code, signal) {
+		console.log('[error] worker process (pid ' + worker.process.pid + ') died!');
+	});
+
+	console.log('node-resource-proxy started; running with ' + numCPUs + ' worker processes.');
+} else {
+	http.createServer(handleRequest).listen(config.server.port, config.server.host);
+}
