@@ -3,9 +3,7 @@
   "version": "0.0.1",
   "description": "Configurable, restricting resource proxy",
   "main": "index.js",
-  "dependencies": {
-    "express": "^4.8.5"
-  },
+  "dependencies": {},
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -20,7 +18,7 @@
     "proxy"
   ],
   "author": "boboman13",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/boboman13/node-resource-proxy/issues"
   },
